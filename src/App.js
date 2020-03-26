@@ -10,13 +10,26 @@ let todosList = [
   ];
 
 function App() {
-  const [todos, setTodos] = useState(todosList.map(item => <TodoItem todo={item} key={item.id} />));
+  
+
+  function updateTodosView() {
+    setTodos(todosList.map(item => <TodoItem todo={item} key={item.id} removeTodoProp={removeTodo} />));
+  };
+
+  const [todos, setTodos] = useState(todosList.map(item => <TodoItem todo={item} key={item.id} removeTodoProp={removeTodo} />));
 
   function addNewTodo() {
     const descrp = document.querySelector('#new-todo-text').value;
-    const id = todosList[todosList.length - 1].id + 1 || 1; 
+    const id = todosList.length ? todosList[todosList.length - 1].id + 1 : 1;
     todosList.push({descrp, id});
-    setTodos(todosList.map(item => <TodoItem todo={item} key={item.id} />));
+    updateTodosView();
+  };
+
+  function removeTodo(elem) {
+    const updatedTodosList = todosList.filter(item => item.id !== +elem.id);
+    console.log(elem.id);
+    todosList = updatedTodosList;
+    updateTodosView();
   };
 
   return (
