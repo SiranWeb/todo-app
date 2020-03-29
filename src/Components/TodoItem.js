@@ -5,10 +5,14 @@ function TodoItem(props) {
         props.removeTodoProp(e.target.parentNode);
     }
 
+    function handleSetCheck(e) {
+        props.setCheckProp(e.target);
+    }
+
     return(
         <div className="todo-item" id={props.todo.id}>
             <div>
-            <input type="checkbox" className="todo-checkbox" checked={props.todo.isChecked}/>
+            <input type="checkbox" className="todo-checkbox" onClick={handleSetCheck} defaultChecked={props.todo.isChecked}/>
             <p className="todo-descrp">{props.todo.descrp}</p>
             </div>
             <button className="remove-btn" onClick={handleRemoveTodo}>X</button>
