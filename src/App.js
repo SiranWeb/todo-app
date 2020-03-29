@@ -9,9 +9,9 @@ let todosList = [
   {descrp: 'Code', id: 3, isChecked: false}
   ];
 
-function App() {
-  
+todosList = JSON.parse(localStorage.getItem('storageTodosList'));
 
+function App() {
   function updateTodosView() {
     setTodos(todosList.map(item =>
     <TodoItem
@@ -37,12 +37,14 @@ function App() {
     if (descrp) {
       todosList.push({descrp, id, isChecked: false});
     }
+    updateStorageTodosList()
     updateTodosView();
   };
 
   function removeTodo(elem) {
     const updatedTodosList = todosList.filter(item => item.id !== +elem.id);
     todosList = updatedTodosList;
+    updateStorageTodosList()
     updateTodosView();
   };
 
@@ -54,7 +56,12 @@ function App() {
       }
       
     }
+    updateStorageTodosList()
     updateTodosView();
+  }
+
+  function updateStorageTodosList() {
+    localStorage.setItem('storageTodosList', JSON.stringify(todosList));
   }
 
   document.addEventListener('keypress', function(e) {
@@ -62,9 +69,8 @@ function App() {
       addNewTodo();
     }
   });
-
   
-
+  
   return (
     <div className="app">
       <h1>My Todo App on React</h1>
