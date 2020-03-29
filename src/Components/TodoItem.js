@@ -7,9 +7,11 @@ function TodoItem(props) {
 
     return(
         <div className="todo-item" id={props.todo.id}>
+            <div>
             <input type="checkbox" className="todo-checkbox" checked={props.todo.isChecked}/>
             <p className="todo-descrp">{props.todo.descrp}</p>
-            <button onClick={handleRemoveTodo}>X</button>
+            </div>
+            <button className="remove-btn" onClick={handleRemoveTodo}>X</button>
         </div>
     );
 };
