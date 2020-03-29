@@ -9,7 +9,9 @@ let todosList = [
   {descrp: 'Code', id: 3, isChecked: false}
   ];
 
-todosList = JSON.parse(localStorage.getItem('storageTodosList'));
+if (JSON.parse(localStorage.getItem('storageTodosList'))) {
+  todosList = JSON.parse(localStorage.getItem('storageTodosList'));
+}
 
 function App() {
   function updateTodosView() {
